@@ -1,5 +1,6 @@
 package com.xiongyingqi.jdbc.driver;
 
+import com.xiongyingqi.jdbc.driver.impl.HsqlDbDriver;
 import com.xiongyingqi.jdbc.driver.impl.MySqlDriver;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,5 +15,9 @@ public class DriverAdapterManagerTest {
     public void testGetDriverAdapter() throws Exception {
         DriverAdapter mysql = DriverAdapterManager.getDriverAdapter("mysql");
         Assert.assertEquals(MySqlDriver.class.getName(), mysql.getClass().getName());
+        DriverAdapter hsqldb = DriverAdapterManager.getDriverAdapter("hsqldb");
+        Assert.assertEquals(HsqlDbDriver.class.getName(), hsqldb.getClass().getName());
     }
+
+
 }

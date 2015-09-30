@@ -63,6 +63,14 @@ public class DriverAdapterManager {
     }
 
     public static DriverAdapter getDriverAdapter(String name) {
+        DriverAdapter driverAdapter = _getDriverAdapter(name);
+        if (logger.isDebugEnabled()) {
+            logger.debug("getDriverAdapter... name: {}, return driverAdapter: {}", name, driverAdapter);
+        }
+        return driverAdapter;
+    }
+
+    private static DriverAdapter _getDriverAdapter(String name) {
         Assert.hasText(name);
         for (DriverAdapter driverAdapter : driverAdapters) {
             if (name.equals(driverAdapter.supportName())) {

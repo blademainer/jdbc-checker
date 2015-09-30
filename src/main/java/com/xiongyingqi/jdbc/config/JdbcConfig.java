@@ -7,32 +7,37 @@ package com.xiongyingqi.jdbc.config;
 public class JdbcConfig {
     private String name;
     private String host;
-    private String port;
+    private Integer port;
     private String database;
     private String userName;
     private String password;
+    private String encode;
+    public static final String DEFAULT_ENCODING = "UTF8";
 
     public JdbcConfig() {
     }
-
     /**
      * 带参数初始化
-     *
-     * @param name     数据库名称，如mysql、oracle
+     *  @param name     数据库名称，如mysql、oracle
      * @param host
      * @param port
      * @param database
      * @param userName
      * @param password
+     * @param encode
      */
-    public JdbcConfig(String name, String host, String port, String database, String userName, String password) {
+    public JdbcConfig(String name, String host, Integer port, String database, String userName, String password, String encode) {
         this.name = name;
         this.host = host;
         this.port = port;
         this.database = database;
         this.userName = userName;
         this.password = password;
+        this.encode = encode;
     }
+
+
+
 
     public String getHost() {
         return host;
@@ -42,11 +47,11 @@ public class JdbcConfig {
         this.host = host;
     }
 
-    public String getPort() {
-        return port == null || "".equals(port.trim()) ? "3306" : host;
+    public Integer getPort() {
+        return port == null ? 3306 : port;
     }
 
-    public void setPort(String port) {
+    public void setPort(Integer port) {
         this.port = port;
     }
 
@@ -82,6 +87,27 @@ public class JdbcConfig {
         this.userName = userName;
     }
 
+    public String getEncode() {
+        return encode;
+    }
+
+    public void setEncode(String encode) {
+        this.encode = encode;
+    }
+
+    @Override
+    public String toString() {
+        return "JdbcConfig{" +
+                "name='" + name + '\'' +
+                ", host='" + host + '\'' +
+                ", port='" + port + '\'' +
+                ", database='" + database + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", encode='" + encode + '\'' +
+                '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,7 +120,8 @@ public class JdbcConfig {
         if (port != null ? !port.equals(that.port) : that.port != null) return false;
         if (database != null ? !database.equals(that.database) : that.database != null) return false;
         if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
-        return !(password != null ? !password.equals(that.password) : that.password != null);
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        return !(encode != null ? !encode.equals(that.encode) : that.encode != null);
 
     }
 
@@ -106,18 +133,7 @@ public class JdbcConfig {
         result = 31 * result + (database != null ? database.hashCode() : 0);
         result = 31 * result + (userName != null ? userName.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (encode != null ? encode.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "JdbcConfig{" +
-                "name='" + name + '\'' +
-                ", host='" + host + '\'' +
-                ", port='" + port + '\'' +
-                ", database='" + database + '\'' +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }

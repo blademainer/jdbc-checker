@@ -2,6 +2,7 @@ package com.xiongyingqi.jdbc.driver.impl;
 
 import com.xiongyingqi.jdbc.config.JdbcConfig;
 import com.xiongyingqi.jdbc.driver.DriverAdapter;
+import com.xiongyingqi.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MySqlDriver implements DriverAdapter {
     private static final Logger logger = LoggerFactory.getLogger(MySqlDriver.class);
+
     public String driverClassName() {
         return "com.mysql.jdbc.Driver";
     }
@@ -30,6 +32,11 @@ public class MySqlDriver implements DriverAdapter {
     }
 
     public String url(JdbcConfig jdbcConfig) {
-        return "jdbc:mysql://" + jdbcConfig.getHost() + ":" + jdbcConfig.getPort() + "/" + jdbcConfig.getDatabase();
+        String url = "jdbc:mysql://" + jdbcConfig.getHost() + ":" + jdbcConfig.getPort() + "/" + jdbcConfig.getDatabase();
+        if (StringUtils.hasText(jdbcConfig.getEncode())) {
+            url += "?useUnicode=true&characterEncoding=" + jdbcConfig.getEncode();
+        }
+        return url;
     }
+
 }

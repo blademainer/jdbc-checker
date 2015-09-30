@@ -34,6 +34,9 @@
         <taskschedule.version>1.0.0-SNAPSHOT</taskschedule.version>
         <httpclient.version>4.3.6</httpclient.version>
         <http_util.version>0.1.10</http_util.version>
+        <hsqldb.version>2.3.2</hsqldb.version>
+        <mysql.connector.mxj.version>5.0.12</mysql.connector.mxj.version>
+        <embedded.mysql.version>0.7</embedded.mysql.version>
     </properties>
 
     <dependencies>
@@ -77,6 +80,21 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+        </dependency>
+
+        <!--<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-mxj</artifactId>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.kill-bill.commons</groupId>
+            <artifactId>killbill-embeddeddb-mysql</artifactId>
         </dependency>
     </dependencies>
 
@@ -267,29 +285,6 @@
                 <version>${aspectj.version}</version>
                 <scope>runtime</scope>
             </dependency>
-            <dependency>
-                <groupId>com.xunlei.channel</groupId>
-                <artifactId>paycommon-configcache</artifactId>
-                <version>${paycommon.configcache.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.xunlei.commons</groupId>
-                <artifactId>XLCommons</artifactId>
-                <version>${XLCommons.version}</version>
-            </dependency>
-
-            <!-- DB-Service -->
-            <dependency>
-                <groupId>com.xunlei.channel</groupId>
-                <artifactId>alarmcenter-dbservice</artifactId>
-                <version>${alarmcenter-dbservice.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.xunlei.channel</groupId>
-                <artifactId>task-schedule</artifactId>
-                <version>${taskschedule.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
@@ -350,11 +345,33 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
+            <!-- Databases - Uses HSQL by default -->
+            <dependency>
+                <groupId>org.hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>${hsqldb.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-mxj</artifactId>
+                <version>${mysql.connector.mxj.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.kill-bill.commons</groupId>
+                <artifactId>killbill-embeddeddb-mysql</artifactId>
+                <version>${embedded.mysql.version}</version>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
